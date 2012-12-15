@@ -11,9 +11,11 @@ exports.tapas =
                 responsive: false
 
 exports.icecast_servers =
-    onouo: [
-        "http://admin:password@my.icecast-server.com:8000/"
-        "http://admin:password@my-friends.icecast-server.com:8000/"
-    ]
+    servers: require(process.env[if process.platform == 'win32' then 'USERPROFILE' else 'HOME'] + '/.icecast-servers.json')
+    # or
+    #servers: [
+    #  'http://admin:pass@icecast-server-1.com:8000/'
+    #  'http://admin:pass@icecast-server-2.com:8000/'
+    # ]
 
 exports.timer = 500
