@@ -18,4 +18,4 @@ exports.icecast_servers =
     #  'http://admin:pass@icecast-server-2.com:8000/'
     # ]
 
-exports.timer = 500
+exports.timer = 200

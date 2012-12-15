@@ -42,3 +42,5 @@ $(document).ready ->
 
     socket.on 'connect', ->
         socket.emit 'getTree', createTable
+
+    socket.on 'updateServer', updateServer
