@@ -1,0 +1,7 @@
+config.coffee
+builtAssets
+*.local.*
+*~
+*#
+.#*
+node_modules

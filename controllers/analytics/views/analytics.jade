@@ -1,0 +1,11 @@
+extends layout
+
+append css_custom
+  != analytics_assets.css('/analytics')
+
+append js_custom
+  != analytics_assets.js('/analytics')
+  script(type="text/javascript", src="/socket.io/socket.io.js")
+
+block content
+  table#stats.table.table-striped.table-bordered

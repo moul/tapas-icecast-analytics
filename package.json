@@ -1,0 +1,27 @@
+{
+  "name": "tapas-icecast-analytics",
+  "version": "0.0.1",
+  "description": "Icecast Analytics made with Tapas",
+  "main": "app.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:moul/tapas-icecast-analytics"
+  },
+  "dependencies": {
+    "tapas": "0.0.3",
+    "icecast-admin": "0.0.2"
+  },
+  "keywords": [
+    "tapas",
+    "icecast",
+    "analytics",
+    "coffee",
+    "coffeescript",
+    "socket.io"
+  ],
+  "author": "Manfred Touron <m@42.am>",
+  "license": "MIT"
+}

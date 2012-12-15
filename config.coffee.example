@@ -1,0 +1,19 @@
+exports.tapas =
+    port: 9512
+    debug: true
+    locals:
+        site_name:      'Icecast Analytics'
+        author:         'Manfred Touron'
+        description:    'Icecast Analytics'
+        use:
+            bootstrap:
+                fluid: true
+                responsive: false
+
+exports.icecast_servers =
+    onouo: [
+        "http://admin:password@my.icecast-server.com:8000/"
+        "http://admin:password@my-friends.icecast-server.com:8000/"
+    ]
+
+exports.timer = 500
