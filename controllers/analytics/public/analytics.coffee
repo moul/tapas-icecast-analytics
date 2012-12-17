@@ -8,12 +8,17 @@ cols =
 
 updateServer = (server) ->
     for id, mount of server
-        console.log mount
+        #console.log mount
         tr = $("tr[data-rid=\"#{mount.id}#{mount.server_name}\"]")
         tds = tr.find('td')
         i = 1
         for key, value of cols
-            $(tds[i++]).html mount[key]
+            td = $(tds[i++])
+            if mount[key] == '0'
+                td.addClass 'nullvalue'
+            else
+                td.removeClass 'nullvalue'
+            td.html mount[key]
 
 createTable = (tree) ->
     table = $('#stats')
