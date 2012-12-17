@@ -7,5 +7,9 @@ append js_custom
   != analytics_assets.js('/analytics')
   script(type="text/javascript", src="/socket.io/socket.io.js")
 
+append head
+  if mount
+    meta(name="mount", content=mount)
+
 block content
   table#stats.table.table-striped.table-bordered

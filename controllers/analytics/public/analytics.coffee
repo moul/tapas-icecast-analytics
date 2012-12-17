@@ -1,3 +1,5 @@
+options = {}
+
 cols =
     listeners: "Listeners"
     slow_listeners: "Slow listeners"
@@ -12,6 +14,8 @@ total =
 
 updateServer = (server) ->
     for id, mount of server
+        if options.mount && mount.server_name != options.mount
+            continue
         mount_uuid = "#{mount.id}#{mount.server_name}"
         #console.log mount
         tr = $("tr[data-rid=\"#{mount_uuid}\"]")
@@ -49,6 +53,8 @@ createTable = (tree) ->
             table.append thead
             tbody = $('<tbody/>')
             for mount_name, mount of mounts
+                if options.mount && mount.server_name != options.mount
+                    continue
                 #console.log mount
                 tr = $('<tr/>').attr('data-rid', "#{mount.id}#{mount.server_name}")
                 tr.append $('<th/>').html mount_name
@@ -67,6 +73,7 @@ createTable = (tree) ->
 
 
 $(document).ready ->
+    options.mount = $('meta[name="mount"]').attr('content') || false
     socket = do io.connect
 
     socket.on 'connect', ->
