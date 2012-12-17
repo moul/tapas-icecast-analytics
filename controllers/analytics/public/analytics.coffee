@@ -6,19 +6,35 @@ cols =
     title: "Title"
     bitrate: "Bitrate"
 
+total =
+    listeners:      {}
+    slow_listeners: {}
+
 updateServer = (server) ->
     for id, mount of server
+        mount_uuid = "#{mount.id}#{mount.server_name}"
         #console.log mount
-        tr = $("tr[data-rid=\"#{mount.id}#{mount.server_name}\"]")
+        tr = $("tr[data-rid=\"#{mount_uuid}\"]")
         tds = tr.find('td')
-        i = 1
+        i = 0
         for key, value of cols
+            if key of total
+                total[key][mount_uuid] = parseInt mount[key]
             td = $(tds[i++])
             if mount[key] == '0'
                 td.addClass 'nullvalue'
             else
                 td.removeClass 'nullvalue'
             td.html mount[key]
+    tds = $('tfoot').find('td')
+    i = 0
+    for key, value of cols
+        td = $(tds[i++])
+        if key of total
+            tot = 0
+            for mount_uuid, amount of total[key]
+                tot += amount
+            td.html tot
 
 createTable = (tree) ->
     table = $('#stats')
@@ -35,12 +51,20 @@ createTable = (tree) ->
             for mount_name, mount of mounts
                 #console.log mount
                 tr = $('<tr/>').attr('data-rid', "#{mount.id}#{mount.server_name}")
-                tr.append $('<td/>').html mount_name
+                tr.append $('<th/>').html mount_name
                 for key, value of cols
                     tr.append $('<td/>').html('')
                 tbody.append tr
             table.append tbody
             updateServer mounts
+    tfoot = $('<tfoot/>')
+    tr = $('<tr />')
+    tr.append $('<th/>').html 'Total'
+    for key, value of cols
+        tr.append $('<td/>').html('')
+    tfoot.append tr
+    table.append tfoot
+
 
 $(document).ready ->
     socket = do io.connect
