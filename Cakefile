@@ -6,5 +6,8 @@ task 'dev', 'run dev mode', ->
     nodedev.stderr.on 'data', (data) -> console.log data.toString().trim()
 
 task 'run', 'run in production mode', ->
-    coffee = spawn 'coffee', ['app.coffee']
+    env = process.env
+    env['NODE_ENV'] = 'production'
+    coffee = spawn 'coffee', ['app.coffee'], { env: env }
     coffee.stdout.on 'data', (data) -> console.log data.toString().trim()
+    #coffee.stderr.on 'data', (data) -> console.log data.toString().trim()
