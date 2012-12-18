@@ -8,8 +8,8 @@ append js_custom
   script(type="text/javascript", src="/socket.io/socket.io.js")
 
 append head
-  if mount
-    meta(name="mount", content=mount)
+  if mounts
+    meta(name="mounts", content=mounts)
 
 block content
   table#stats.table.table-striped.table-bordered

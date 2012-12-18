@@ -14,7 +14,7 @@ total =
 
 updateServer = (server) ->
     for id, mount of server
-        if options.mount && mount.server_name != options.mount
+        if options.mounts && mount.server_name not in options.mounts
             continue
         mount_uuid = "#{mount.id}#{mount.server_name}"
         #console.log mount
@@ -53,7 +53,7 @@ createTable = (tree) ->
             table.append thead
             tbody = $('<tbody/>')
             for mount_name, mount of mounts
-                if options.mount && mount.server_name != options.mount
+                if options.mounts && mount.server_name not in options.mounts
                     continue
                 #console.log mount
                 tr = $('<tr/>').attr('data-rid', "#{mount.id}#{mount.server_name}")
@@ -73,7 +73,7 @@ createTable = (tree) ->
 
 
 $(document).ready ->
-    options.mount = $('meta[name="mount"]').attr('content') || false
+    options.mounts = $('meta[name="mounts"]').attr('content').split(/,/) || false
     socket = do io.connect
 
     socket.on 'connect', ->
