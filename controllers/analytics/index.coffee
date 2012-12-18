@@ -54,6 +54,6 @@ updateAdmin = (admin, active = true, firstTime = false) ->
             setTimeout updateNextAdmin, config.timer
 
 exports.index = (req, res) ->
-    mounts = req.query.mount.split(',')
+    mounts = req.query.mount?.split(',') || []
     res.render 'analytics',
         mounts: mounts
