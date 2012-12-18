@@ -8,9 +8,11 @@ tree = {}
 
 next_i = 0
 updateNextAdmin = ->
+    clients = exports.tapas.io.rooms['']?.length || 0
+    active = clients > 0
     admin_key = admins_key[next_i++ % admins_key.length]
     admin = admins[admin_key]
-    updateAdmin admin
+    updateAdmin admin, active
 
 exports.open = (app, tapas) ->
     exports.tapas = tapas
@@ -30,20 +32,24 @@ exports.open = (app, tapas) ->
                 url: server
             admin.id = id
             admin.branch = branch
-            updateAdmin admin, true
+            updateAdmin admin, true, true
     do updateNextAdmin
 
-updateAdmin = (admin, firstTime = false) ->
-    console.log "updateAdmin #{admin.id}"
-    admin.getStats (data) ->
-        for source in data.icestats.source
-            server_name = source['server_name'][0]
-            branch = admin.branch[server_name] =
-                id: admin.id
-                server_name: server_name
-            for key in ['listeners', 'slow_listeners', 'total_bytes_read', 'total_bytes_sent', 'title', 'bitrate', 'max_listeners']
-                branch[key] = source[key][0]
-        exports.tapas.io.sockets.emit 'updateServer', admin.branch
+updateAdmin = (admin, active = true, firstTime = false) ->
+    if active
+        console.log "updateAdmin #{admin.id}"
+        admin.getStats (data) ->
+            for source in data.icestats.source
+                server_name = source['server_name'][0]
+                branch = admin.branch[server_name] =
+                    id: admin.id
+                    server_name: server_name
+                for key in ['listeners', 'slow_listeners', 'total_bytes_read', 'total_bytes_sent', 'title', 'bitrate', 'max_listeners']
+                    branch[key] = source[key][0]
+            exports.tapas.io.sockets.emit 'updateServer', admin.branch
+            if not firstTime
+                setTimeout updateNextAdmin, config.timer
+    else
         if not firstTime
             setTimeout updateNextAdmin, config.timer
 
