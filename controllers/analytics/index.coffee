@@ -45,7 +45,7 @@ updateAdmin = (admin, active = true, firstTime = false) ->
                     id: admin.id
                     server_name: server_name
                 for key in ['listeners', 'slow_listeners', 'total_bytes_read', 'total_bytes_sent', 'title', 'bitrate', 'max_listeners']
-                    branch[key] = source[key][0]
+                    branch[key] = source[key]?[0]
             exports.tapas.io.sockets.emit 'updateServer', admin.branch
             if not firstTime
                 setTimeout updateNextAdmin, config.timer
