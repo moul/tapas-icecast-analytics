@@ -42,6 +42,7 @@ updateServer = (server) ->
 
 createTable = (tree) ->
     table = $('#stats')
+    table.empty()
     for group, servers of tree
         for id, mounts of servers
             thead = $('<thead/>')
