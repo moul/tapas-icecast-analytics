@@ -29,7 +29,10 @@ updateServer = (server) ->
                 td.addClass 'nullvalue'
             else
                 td.removeClass 'nullvalue'
-            td.html mount[key]
+            oldValue = td.html()
+            if oldValue != mount[key]
+                td.html mount[key]
+                td.fadeTo(100, 1).fadeTo(700, 0.3)
     tds = $('tfoot').find('td')
     i = 0
     for key, value of cols
