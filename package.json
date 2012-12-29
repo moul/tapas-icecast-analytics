@@ -1,6 +1,6 @@
 {
   "name": "tapas-icecast-analytics",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Icecast Analytics made with Tapas",
   "main": "app.coffee",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "tapas": "0.0.4",
-    "icecast-admin": "0.0.2"
+    "icecast-admin": "0.0.4"
   },
   "keywords": [
     "tapas",
