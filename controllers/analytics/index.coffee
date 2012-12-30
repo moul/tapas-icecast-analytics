@@ -1,6 +1,6 @@
-url = require 'url'
-config = require '../../config'
-Admin = require('icecast-admin').Admin
+url =     require 'url'
+config =  require '../../config'
+{Admin} = require 'icecast-admin'
 
 admins_key = []
 admins = {}
@@ -16,6 +16,7 @@ updateNextAdmin = ->
 
 exports.open = (app, tapas) ->
   exports.tapas = tapas
+
   tapas.io.on 'connection', (socket) ->
     console.log 'new io client'
     socket.on 'getTree', (fn = null) ->

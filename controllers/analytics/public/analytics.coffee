@@ -25,12 +25,12 @@ updateServer = (server) ->
       if key of total
         total[key][mount_uuid] = parseInt mount[key]
       td = $(tds[i++])
-      if mount[key] == '0'
+      if !mount[key]? or mount[key] == '0'
         td.addClass 'nullvalue'
       else
         td.removeClass 'nullvalue'
       oldValue = td.html()
-      if oldValue != mount[key]
+      if mount[key]? and oldValue != mount[key]
         td.html mount[key]
         td.fadeTo(100, 1).fadeTo(700, 0.3)
   tds = $('tfoot').find('td')
