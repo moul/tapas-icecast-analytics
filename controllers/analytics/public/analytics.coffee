@@ -14,6 +14,15 @@ total =
   total_bytes_sent: {}
   total_bytes_read: {}
 
+file_size_keys = [
+  "total_bytes_sent"
+  "total_bytes_read"
+]
+
+formatFileSize = (nb) ->
+    NumberHelpers.number_to_human_size nb,
+        precision: 5
+
 updateServer = (server) ->
   for id, mount of server
     if options.mounts?.length && mount.server_name not in options.mounts
@@ -33,6 +42,7 @@ updateServer = (server) ->
         td.removeClass 'nullvalue'
       oldValue = td.html()
       if mount[key]? and oldValue != mount[key]
+        mount[key] = formatFileSize mount[key] if key in file_size_keys
         td.html mount[key]
         td.fadeTo(100, 1).fadeTo(700, 0.3)
   tds = $('tfoot').find('td')
@@ -43,6 +53,8 @@ updateServer = (server) ->
       tot = 0
       for mount_uuid, amount of total[key]
         tot += amount
+      if key in file_size_keys
+        tot = formatFileSize tot
       td.html tot
 
 createTable = (tree) ->
