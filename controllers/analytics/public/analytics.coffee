@@ -11,6 +11,8 @@ cols =
 total =
   listeners:    {}
   slow_listeners: {}
+  total_bytes_sent: {}
+  total_bytes_read: {}
 
 updateServer = (server) ->
   for id, mount of server
