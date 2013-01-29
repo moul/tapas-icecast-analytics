@@ -1,6 +1,6 @@
 exports.tapas =
     port: 9512
-    debug: true
+    debug: false
     locals:
         site_name:      'Icecast Analytics'
         author:         'Manfred Touron'
