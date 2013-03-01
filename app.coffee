@@ -5,6 +5,12 @@
 
 config = require './config'
 tapas = do require('tapas')(config.tapas).app
+
+try
+    require('./app.local') tapas
+catch e
+    console.log ''
+
 tapas.autodiscover "./controllers"
 
 do tapas.run
