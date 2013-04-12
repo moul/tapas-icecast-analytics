@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "tapas": "0.0.4",
-    "icecast-admin": "0.0.5"
+    "icecast-admin": "0.2.2"
   },
   "keywords": [
     "tapas",

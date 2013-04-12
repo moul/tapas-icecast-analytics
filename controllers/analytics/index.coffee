@@ -39,7 +39,7 @@ exports.open = (app, tapas) ->
 updateAdmin = (admin, active = true, firstTime = false) ->
   if active
     console.log "updateAdmin #{admin.id}"
-    admin.getStats (err, data) ->
+    admin.stats (err, data) ->
       if err
         console.log "Error with #{admin.id}:", err
       else
