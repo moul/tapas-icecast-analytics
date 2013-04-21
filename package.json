@@ -11,7 +11,7 @@
     "url": "git@github.com:moul/tapas-icecast-analytics"
   },
   "dependencies": {
-    "tapas": "0.0.4",
+    "tapas": "0.3.2",
     "icecast-admin": "0.2.2"
   },
   "keywords": [
