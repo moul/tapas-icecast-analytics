@@ -19,3 +19,8 @@ exports.icecast_servers =
     # ]
 
 exports.timer = 100
+
+try
+    require('./config.local') exports
+catch e
+    console.log ''
