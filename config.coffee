@@ -3,7 +3,7 @@ exports.tapas =
   debug: false
   locals:
     site_name:    'Icecast Analytics'
-    author:     'Manfred Touron'
+    author:       'Manfred Touron'
     description:  'Icecast Analytics'
     use:
       jquery: true
