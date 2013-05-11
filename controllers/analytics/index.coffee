@@ -16,6 +16,7 @@ next_i = 0
 updateNextAdmin = ->
   metrics.increment "#{config.statsd.prefix}.updateNextAdmin"
   clients = exports.tapas.io.rooms['']?.length || 0
+  metrics.gauge "#{config.statsd.prefix}.io.clients", clients
   active = clients > 0
   admin_key = admins_key[next_i++ % admins_key.length]
   admin = admins[admin_key]
@@ -45,8 +46,10 @@ exports.open = (app, tapas) ->
       updateAdmin admin, true, true
   do updateNextAdmin
 
+inactiveLoop = 0
 updateAdmin = (admin, active = true, firstTime = false) ->
   if active
+    inactiveLoop = 0
     console.log "updateAdmin #{admin.id}"
     metric_name = "#{config.statsd.prefix}.icecast.#{admin.id.replace(/[^a-zA-Z0-9]/g,'-')}"
     admin.stats (err, data) ->
@@ -72,7 +75,11 @@ updateAdmin = (admin, active = true, firstTime = false) ->
         setTimeout updateNextAdmin, config.timer
   else
     if not firstTime
-      setTimeout updateNextAdmin, config.timer
+      inactiveLoop++
+      if inactiveLoop > config.inactiveLoopMax
+        updateAdmin admin, true
+      else
+        setTimeout updateNextAdmin, config.timer
 
 exports.index = (req, res) ->
   metrics.increment "#{config.statsd.prefix}.page.index"

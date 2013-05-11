@@ -24,6 +24,8 @@ exports.icecast_servers =
   #  'http://admin:pass@icecast-server-2.com:8000/'
   # ]
 
+exports.inactiveLoopMax = 30
+
 exports.timer = 100
 
 try
