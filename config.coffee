@@ -11,6 +11,11 @@ exports.tapas =
         fluid: true
         responsive: false
 
+exports.statsd =
+  host: '127.0.0.1'
+  port: 8125
+  prefix: 'icecast-analytics'
+
 exports.icecast_servers =
   servers: require(process.env[if process.platform == 'win32' then 'USERPROFILE' else 'HOME'] + '/.icecast-servers.json')
   # or
