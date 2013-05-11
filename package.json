@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "tapas": "0.3.2",
-    "icecast-admin": "0.2.2"
+    "icecast-admin": "0.2.2",
+    "lynx": "0.0.11"
   },
   "keywords": [
     "tapas",
