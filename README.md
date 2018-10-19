@@ -1,6 +1,8 @@
 Tapas Icecast Admin
 ===================
 
+[![GuardRails badge](https://badges.production.guardrails.io/moul/tapas-icecast-analytics.svg)](https://www.guardrails.io)
+
 by Manfred Touron
 
 ```bash
